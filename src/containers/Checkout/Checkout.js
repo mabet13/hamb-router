@@ -1,10 +1,11 @@
-import React, {Component } from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import ContactData from './Contactdata/ContactData';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+
 class Checkout extends Component {
     state = {
-        ingredients: null,
+        ingredients: {},
         price: 0
     }
 
@@ -13,6 +14,7 @@ class Checkout extends Component {
         const ingredients = {};
         let price = 0;
         for (let param of query.entries()) {
+            console.log(param);
             if (param[0] === 'price') {
                 price = +param[1];
             }
@@ -20,7 +22,7 @@ class Checkout extends Component {
                 ingredients[param[0]] = +param[1];
             };
         };
-        this.setState({ingredients: ingredients, price: price});
+       this.setState({ingredients: ingredients, price: price});
     }
 
     checkoutCancelledHandler = () => {
@@ -42,11 +44,10 @@ class Checkout extends Component {
                 />
                 <Route 
                     path={this.props.match.path + '/contact-data'} 
-                     // component={ContactData} 
                     render={(props) => (
                         <ContactData 
-                            ingredient={this.state.ingredients} 
-                            price={this.state.totalPrice}
+                            ingredients={this.state.ingredients} 
+                            price={this.state.price}
                             {...props}
                         />
                     )}
