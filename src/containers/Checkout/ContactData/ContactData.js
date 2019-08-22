@@ -6,11 +6,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
-<<<<<<< HEAD
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 import * as actions from '../../../store/actions/index';
-=======
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1
 
 class ContactData extends Component {
     state = {
@@ -92,30 +89,17 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-<<<<<<< HEAD
                 value: 'fastest',
-=======
-                value: '',
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1
                 validation: {},
                 valid: true
             }
         },
-<<<<<<< HEAD
         formIsValid: false
-=======
-        formIsValid: false,
-        loading: false
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1
     }
 
     orderHandler = ( event ) => {
         event.preventDefault();
-<<<<<<< HEAD
   
-=======
-        this.setState( { loading: true } );
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1
         const formData = {};
         for (let formElementIdentifier in this.state.orderForm) {
             formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
@@ -123,25 +107,12 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ings,
             price: this.props.price,
-<<<<<<< HEAD
             orderData: formData,
             userId: this.props.userId
         }
 
         this.props.onOrderBurger(order, this.props.token);
         
-=======
-            orderData: formData
-        }
-        axios.post( '/orders.json', order )
-            .then( response => {
-                this.setState( { loading: false } );
-                this.props.history.push( '/' );
-            } )
-            .catch( error => {
-                this.setState( { loading: false } );
-            } );
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1
     }
 
     checkValidity(value, rules) {
@@ -218,11 +189,7 @@ class ContactData extends Component {
                 <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
-<<<<<<< HEAD
         if ( this.props.loading ) {
-=======
-        if ( this.state.loading ) {
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1
             form = <Spinner />;
         }
         return (
@@ -236,7 +203,6 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
     return {
-<<<<<<< HEAD
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
@@ -252,11 +218,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));
-=======
-        ings: state.ingredients,
-        price: state.totalPrice
-    }
-};
-
-export default connect(mapStateToProps)(ContactData);
->>>>>>> aa35dbb6f2317d919144be1ff3105969f83632c1

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+import * as localEnv from '../../.env.js';
 
 export const authStart = () => {
     return {
@@ -47,9 +48,9 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         };
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=[key]';
+        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key='+localEnv.webapi;
         if (!isSignup) {
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=[key]';
+            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key='+localEnv.webapi;
         }
         axios.post(url, authData)
             .then(response => {

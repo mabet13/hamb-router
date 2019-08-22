@@ -33,7 +33,6 @@ export const fetchIngredientsFailed = () => {
 export const initIngredients = () => {
     return dispatch => {
         const url = localEnv.firebaseDB + '/ingredients.json';
-        //'https://hamburgers-5924f.firebaseio.com/ingredients.json'
         axios.get( url )
             .then( response => {
                dispatch(setIngredients(response.data));
